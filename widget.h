@@ -20,11 +20,11 @@ public:
     ~Widget();
     QTcpSocket tcpSocket_;
     QSslSocket sslSocket_;
-    ushort checkProtocol();
+    ushort protocol = 80;
 
 public slots:
     void doConnected();
-    void doDisconnected();
+    void doDisconnected(uint protocol);
     void doReadyRead();
 
 private slots:
@@ -35,6 +35,10 @@ private slots:
     void on_pbSend_clicked();
 
     void on_pbClear_clicked();
+
+    void on_rbTcp_clicked();
+
+    void on_rbSsl_clicked();
 
 private:
     Ui::Widget *ui;

@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
@@ -43,6 +43,9 @@
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <property name="spacing">
+        <number>12</number>
+       </property>
        <item>
         <widget class="QLineEdit" name="leHost">
          <property name="sizePolicy">
@@ -58,19 +61,62 @@
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>10</number>
+         </property>
          <item>
-          <widget class="QRadioButton" name="rbTcp">
-           <property name="text">
-            <string>TCP</string>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <property name="spacing">
+            <number>0</number>
            </property>
-          </widget>
+           <item>
+            <widget class="QRadioButton" name="rbTcp">
+             <property name="text">
+              <string>TCP</string>
+             </property>
+             <property name="checkable">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbTcp">
+             <property name="layoutDirection">
+              <enum>Qt::LayoutDirection::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Disconnected</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QRadioButton" name="rbSsl">
-           <property name="text">
-            <string>SSL</string>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <property name="spacing">
+            <number>0</number>
            </property>
-          </widget>
+           <item>
+            <widget class="QRadioButton" name="rbSsl">
+             <property name="text">
+              <string>SSL</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lbSsl">
+             <property name="text">
+              <string>Disconnected</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
