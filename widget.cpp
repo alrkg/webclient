@@ -10,9 +10,9 @@ Widget::Widget(QWidget *parent)
 
     ui->rbTcp->click();
 
-    QObject::connect(&socket_, &QAbstractSocket::connected, this, &Widget::doConnected);
-    QObject::connect(&socket_, &QAbstractSocket::disconnected, this, &Widget::doDisconnected);
-    QObject::connect(&socket_, &QIODevice::readyRead, this, &Widget::doReadyRead);
+    QObject::connect(&tcpSocket_, &QAbstractSocket::connected, this, &Widget::doConnected);
+    QObject::connect(&tcpSocket_, &QAbstractSocket::disconnected, this, &Widget::doDisconnected);
+    QObject::connect(&tcpSocket_, &QIODevice::readyRead, this, &Widget::doReadyRead);
 
     QObject::connect(&sslSocket_, &QAbstractSocket::connected, this, &Widget::doConnected);
     QObject::connect(&sslSocket_, &QAbstractSocket::disconnected, this, &Widget::doDisconnected);
@@ -32,7 +32,7 @@ ushort Widget::checkProtocol(){
 void Widget::doConnected(){
     QString msg;
     if (checkProtocol() == 80)
-        msg = "Connected " + socket_.peerAddress().toString() + " using TCP\n";
+        msg = "Connected " + tcpSocket_.peerAddress().toString() + " using TCP\n";
     else
         msg = "Connected " + sslSocket_.peerAddress().toString() + " using SSL\n";
     ui->pteMessage->insertPlainText(msg);
@@ -46,7 +46,7 @@ void Widget::doDisconnected(){
 void Widget::doReadyRead(){
     QByteArray ba;
     if (checkProtocol() == 80)
-        ba = socket_.readAll();
+        ba = tcpSocket_.readAll();
     else
         ba = sslSocket_.readAll();
     ui->pteMessage->insertPlainText(ba);
@@ -55,7 +55,7 @@ void Widget::doReadyRead(){
 void Widget::on_pbConnect_clicked()
 {
     if(checkProtocol() == 80)
-        socket_.connectToHost(ui->leHost->text(), checkProtocol());
+        tcpSocket_.connectToHost(ui->leHost->text(), checkProtocol());
     else
         sslSocket_.connectToHostEncrypted(ui->leHost->text(), checkProtocol());
 }
@@ -64,7 +64,7 @@ void Widget::on_pbConnect_clicked()
 void Widget::on_pbDisconnect_clicked()
 {
     if (checkProtocol() == 80)
-        socket_.disconnectFromHost();
+        tcpSocket_.disconnectFromHost();
     else
         sslSocket_.disconnectFromHost();
 }
@@ -73,7 +73,7 @@ void Widget::on_pbDisconnect_clicked()
 void Widget::on_pbSend_clicked()
 {
     if (checkProtocol() == 80)
-        socket_.write(ui->pteSend->toPlainText().toUtf8());
+        tcpSocket_.write(ui->pteSend->toPlainText().toUtf8());
     else
         sslSocket_.write(ui->pteSend->toPlainText().toUtf8());
 }

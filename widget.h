@@ -18,7 +18,7 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = nullptr);
     ~Widget();
-    QTcpSocket socket_;
+    QTcpSocket tcpSocket_;
     QSslSocket sslSocket_;
     ushort checkProtocol();
 
