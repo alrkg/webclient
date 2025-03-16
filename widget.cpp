@@ -9,13 +9,14 @@ Widget::Widget(QWidget *parent)
     ui->setupUi(this);
 
     ui->rbTcp->click();
+    protocol = 80;
 
     QObject::connect(&tcpSocket_, &QAbstractSocket::connected, this, &Widget::doConnected);
-    QObject::connect(&tcpSocket_, &QAbstractSocket::disconnected, this, [this]{doDisconnected(80);});
+    QObject::connect(&tcpSocket_, &QAbstractSocket::disconnected, this, &Widget::doTcpDisconnected);
     QObject::connect(&tcpSocket_, &QIODevice::readyRead, this, &Widget::doReadyRead);
 
     QObject::connect(&sslSocket_, &QAbstractSocket::connected, this, &Widget::doConnected);
-    QObject::connect(&sslSocket_, &QAbstractSocket::disconnected, this, [this]{doDisconnected(443);});
+    QObject::connect(&sslSocket_, &QAbstractSocket::disconnected, this, &Widget::doSslDisconnected);
     QObject::connect(&sslSocket_, &QIODevice::readyRead, this, &Widget::doReadyRead);
 }
 
@@ -31,11 +32,12 @@ void Widget::doConnected(){
         ui->lbSsl->setText("Connecting...");
 }
 
-void Widget::doDisconnected(uint protocol){
-    if (protocol == 80)
-        ui->lbTcp->setText("Disconnected");
-    else
-        ui->lbSsl->setText("Disconnected");
+void Widget::doTcpDisconnected(){
+    ui->lbTcp->setText("Disconnected");
+}
+
+void Widget::doSslDisconnected(){
+    ui->lbSsl->setText("Disconnected");
 }
 
 void Widget::doReadyRead(){

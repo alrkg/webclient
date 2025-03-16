@@ -20,11 +20,12 @@ public:
     ~Widget();
     QTcpSocket tcpSocket_;
     QSslSocket sslSocket_;
-    ushort protocol = 80;
+    ushort protocol;
 
 public slots:
     void doConnected();
-    void doDisconnected(uint protocol);
+    void doTcpDisconnected();
+    void doSslDisconnected();
     void doReadyRead();
 
 private slots:
