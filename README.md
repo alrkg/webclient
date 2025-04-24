@@ -32,6 +32,6 @@ This project is a simple web client that uses TCP and SSL protocols. Users can s
 - UI labels update with "Connected", "Disconnected", etc.
 - Messages are sent to the server, and responses are displayed in real-time
 
-<br><br>
-![webclient](https://github.com/user-attachments/assets/ab5caef5-734b-456d-943e-306fafbe0697)
+![image](https://github.com/user-attachments/assets/9de5ae70-3e6c-4e76-9a78-110b23c7c30e)
+
 
